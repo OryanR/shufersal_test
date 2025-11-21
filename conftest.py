@@ -42,8 +42,7 @@ def page(request):
         if browser_name == "chromium":
             browser = p.chromium.launch(headless=False)
         elif browser_name == "edge":
-            edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-            browser = p.chromium.launch(headless=False, executable_path=edge_path)
+            browser = p.chromium.launch(channel="msedge", headless=True)
         elif browser_name == "firefox":
             if browser_name == "firefox":
                 pytest.skip("Skipping Firefox tests due to network/launch instability.")
