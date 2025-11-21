@@ -6,7 +6,7 @@ import os
 from playwright.sync_api import sync_playwright
 
 browsers = ["chromium", "edge", "firefox"]
-
+HEADLESS = os.environ.get("CI", "false") == "true"
 # -------------------------
 # Pytest fixture
 # -------------------------
@@ -40,13 +40,13 @@ def page(request):
     browser_name = request.param
     with sync_playwright() as p:
         if browser_name == "chromium":
-            browser = p.chromium.launch(headless=False)
+            browser = p.chromium.launch(headless=HEADLESS)
         elif browser_name == "edge":
-            browser = p.chromium.launch(channel="msedge", headless=True)
+            browser = p.chromium.launch(channel="msedge", headless=HEADLESS)
         elif browser_name == "firefox":
             if browser_name == "firefox":
                 pytest.skip("Skipping Firefox tests due to network/launch instability.")
-            browser = p.firefox.launch(headless=False)
+            browser = p.firefox.launch(headless=HEADLESS)
         else:
             raise ValueError(f"Unsupported browser: {browser_name}")
 
