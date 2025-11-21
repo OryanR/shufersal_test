@@ -67,4 +67,4 @@ def test_search_loading_time(page):
     print(f"\nstart time: " + str(start_time))
     print(f"\nend time: " + str(end_time))
     print(f"\nload time: " + str(load_time))
-    assert load_time < acceptable_loading_time, f"loading time took more than {acceptable_loading_time} seconds"
+    assert load_time < acceptable_loading_time, f"loading time took more than {acceptable_loading_time} secondss"
