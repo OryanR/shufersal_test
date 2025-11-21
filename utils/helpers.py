@@ -1,10 +1,6 @@
 def is_firefox(request):
     return request.param == "firefox"
 
-# -------------------------
-# Page functions / actions
-# -------------------------
-
 def search_item(page, search_term, timeout=10000):
     """
     Performs a search and waits for results, 'no results' message,

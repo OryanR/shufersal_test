@@ -5,7 +5,7 @@ import allure
 import os
 from playwright.sync_api import sync_playwright
 
-browsers = ["chromium", "edge", "firefox"]
+browsers = ["chromium", "firefox", "webkit"]
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -38,8 +38,8 @@ def page(request):
     with sync_playwright() as p:
         if browser_name == "chromium":
             browser = p.chromium.launch(headless=HEADLESS)
-        elif browser_name == "edge":
-            browser = p.chromium.launch(channel="msedge", headless=HEADLESS)
+        elif browser_name == "webkit":
+            browser = p.webkit.launch(headless=HEADLESS)
         elif browser_name == "firefox":
             if browser_name == "firefox":
                 pytest.skip("Skipping Firefox tests due to network/launch instability.")
