@@ -6,10 +6,6 @@ import os
 from playwright.sync_api import sync_playwright
 
 browsers = ["chromium", "edge", "firefox"]
-HEADLESS = os.environ.get("CI", "false") == "true"
-# -------------------------
-# Pytest fixture
-# -------------------------
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -37,6 +33,7 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(params=browsers)
 def page(request):
+    HEADLESS = os.environ.get("CI", "false") == "true"
     browser_name = request.param
     with sync_playwright() as p:
         if browser_name == "chromium":
